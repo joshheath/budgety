@@ -220,7 +220,7 @@ var controller = (function(budgetCtrl, UICtrl) {
   var ctrlDeleteItem = function(event) {
     var itemID, splitID, type, ID;
 
-     itemID = event.target.parentNode.parentNode.parentNode.parentNode;
+     itemID = event.target.parentNode.parentNode.parentNode.parentNode.id;
 
      if (itemID) {
 
@@ -233,7 +233,7 @@ var controller = (function(budgetCtrl, UICtrl) {
 
        // 2. delete item from the user interface
 
-       // 3. update and show new totals
+       // 3. update and show new budget
      }
   }
 

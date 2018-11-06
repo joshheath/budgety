@@ -86,7 +86,6 @@ var budgetController = (function() {
       }
     },
 
-
     calculateBudget: function() {
       // Calculate total income and expenses
       calculateTotal('exp');
@@ -103,12 +102,17 @@ var budgetController = (function() {
       }
     },
 
-
     calculatePercentages: function(){
+      data.allItems.exp.forEach(function(cur){
+        cur.calcPercentage(data.totals.inc);
+      });
+    },
 
-
-
-
+    getPercentages: function(){
+      var allPerc = data.allItems.exp.map(function(cur){
+        return cur.getPercentage();
+      });
+      return allPerc;
     },
 
     getBudget: function(){
@@ -229,7 +233,6 @@ var controller = (function(budgetCtrl, UICtrl) {
     });
 
     document.querySelector(DOM.container).addEventListener('click', ctrlDeleteItem);
-
   };
 
   var updateBudget = function() {
@@ -241,14 +244,14 @@ var controller = (function(budgetCtrl, UICtrl) {
     UICtrl.displayBudget(budget);
   };
 
-  updatePercentages: function(){
+  var updatePercentages = function(){
     // 1. calculate percentages
-
+    budgetCtrl.calculatePercentages();
     // 2. read percentages from budget controller
-
+    var percentage = budgetCtrl.getPercentages();
     // 3. update UI with new percentages
-
-  }
+    console.log(percentage);
+  };
 
   var ctrlAddItem = function(){
     var input, newItem;
